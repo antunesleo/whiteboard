@@ -15,3 +15,9 @@ bashc:
 
 test:
 	docker-compose run websocket poetry run pytest
+
+migrate:
+	docker-compose run websocket python manage.py migrate
+
+makemigrations:
+	docker-compose run websocket python manage.py migrate
