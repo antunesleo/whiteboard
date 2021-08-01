@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "whiteboard"
+version = "0.1.0"
+description = ""
+authors = ["Leo Antunes"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Django = "3.2.5"
+channels = "^3.0.4"
+channels-redis = "^3.3.0"
+
+
+[tool.poetry.dev-dependencies]
+black = "^21.7b0"
+pytest = "^6.2.4"
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
