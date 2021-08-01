@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from boards.views import index, board
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", index),
+    path("boards/<board_code>", board),
 ]

@@ -11,7 +11,10 @@ import os
 
 import django
 from channels.http import AsgiHandler
-from channels.routing import ProtocolTypeRouter
+from channels.routing import ProtocolTypeRouter, URLRouter
+from channels.auth import AuthMiddlewareStack
+
+from boards import routing
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "whiteboard.settings")
 django.setup()
@@ -19,6 +22,6 @@ django.setup()
 application = ProtocolTypeRouter(
     {
         "http": AsgiHandler(),
-        ## IMPORTANT::Just HTTP for now. (We can add other protocols later.)
+        "websocket": AuthMiddlewareStack(URLRouter(routing.websocket_urlpatterns)),
     }
 )

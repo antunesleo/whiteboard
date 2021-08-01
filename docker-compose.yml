@@ -18,6 +18,16 @@ services:
     networks:
       - whiteboard
 
+  redis:
+    container_name: redis
+    image: bitnami/redis:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6379:6379
+    networks:
+      - whiteboard
+
 networks:
   whiteboard:
     driver: bridge
