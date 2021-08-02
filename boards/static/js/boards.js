@@ -7,11 +7,13 @@ canvasContext.fillStyle="#fff";
 canvasContext.fillRect(0,0, boardCanvas.width, boardCanvas.height);
 
 let isDown = false;
+let isWebsocketDown = false;
 
 if(boardCanvas){
     canvasContext.lineWidth = 5;
 
     boardCanvas.onmousedown = function(e){
+        isDown = true;
         let message = {
             event: "on-mouse-down",
             position: {
@@ -36,6 +38,7 @@ if(boardCanvas){
     }
 
     boardCanvas.onmouseup = function(e){
+        isDown = false;
         let message = {
             event: "on-mouse-up",
         }
@@ -44,19 +47,21 @@ if(boardCanvas){
 }
 
 function handleMouseDown(position) {
-    isDown = true;
+    isWebsocketDown = true;
     canvasContext.beginPath();
     canvasContext.moveTo(position.x, position.y);
 }
 
 function handleMouseMove(position) {
-    canvasContext.lineTo(position.x, position.y);
-    canvasContext.strokeStyle = "#000";
-    canvasContext.stroke();
+    if (isWebsocketDown) {
+        canvasContext.lineTo(position.x, position.y);
+        canvasContext.strokeStyle = "#000";
+        canvasContext.stroke();
+    }
 }
 
 function handleMouseUp() {
-    isDown = false;
+    isWebsocketDown = false;
     canvasContext.closePath();
 }
 
